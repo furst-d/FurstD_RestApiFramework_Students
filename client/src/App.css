@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.App {
+  text-align: center;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  align-items: center;
+}
+
+.content {
+  margin: 30px 0 30px 0;
+  width: 90%;
+  max-width: 70em;
+  padding: 1.5em;
+  border-radius: 10px;
+  border: solid black 1px;
+}
+
+.studentPreview {
+  margin: 10px;
+  padding: 10px;
+  border: solid black 1px;
+  border-radius: 5px;
+  text-align: left;
+  display: flex;
+}
+
+.studentPreview-left {
+  flex: 1 1 auto;
+}
+.studentPreview-right {
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  padding: 50px;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+button {
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+}
+
+.deleteButton {
+  background-color: red;
+}
+
+.successButton {
+  background-color: green;
+}
+
+.logoutButton {
+  background-color: red;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+input, select {
+  margin: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 30px;
+  border: solid black 1px;
+}
+
+.marks {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.marks td, .marks th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.marks tr:nth-child(even){background-color: #f2f2f2;}
+
+.marks tr:hover {background-color: #ddd;}
+
+.marks th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+

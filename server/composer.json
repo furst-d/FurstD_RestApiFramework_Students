@@ -1,0 +1,16 @@
+{
+    "name": "furstd/furst-d_rest-api-framework_skeleton",
+    "autoload": {
+        "psr-4": {
+        }
+    },
+    "authors": [
+        {
+            "name": "Dominik Furst",
+            "email": "st60987@upce.cz"
+        }
+    ],
+    "require": {
+        "furstd/furst-d_rest-api-framework": "^1.0"
+    }
+}

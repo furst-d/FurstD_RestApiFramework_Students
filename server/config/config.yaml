@@ -1,0 +1,282 @@
+/students:
+  - GET:
+      type: DB
+      table: students
+      columns:
+        - student_id:
+            alias: id
+        - first_name:
+            alias: firstName
+        - last_name:
+            alias: lastName
+        - class
+      authorization:
+        - ADMIN
+        - TEACHER
+  - POST:
+      type: DB
+      table: students
+      content:
+        - name:
+            type: string
+            required: true
+            represents: first_name
+        - lastname:
+            type: string
+            required: true
+            represents: last_name
+        - class:
+            type: integer
+            required: true
+      authorization:
+        - ADMIN
+
+/subjects:
+  - GET:
+      type: DB
+      table: subjects
+      columns:
+        - subject_id:
+            alias: value
+        - name:
+            alias: label
+      authorization:
+        - ADMIN
+        - TEACHER
+
+/students/{id}:
+  - GET:
+      type: DB
+      table: students
+      columns:
+        - first_name:
+            alias: firstName
+        - last_name:
+            alias: lastName
+        - class
+      parameters:
+        - id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: students.student_id
+      authorization:
+        - ADMIN
+        - TEACHER
+  - PUT:
+      type: DB
+      table: students
+      content:
+        - name:
+            type: string
+            required: false
+            represents: first_name
+        - lastname:
+            type: string
+            required: false
+            represents: last_name
+        - class:
+            type: integer
+            required: false
+      parameters:
+        - id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: students.student_id
+      authorization:
+        - ADMIN
+  - DELETE:
+      type: DB
+      table: students
+      parameters:
+        - id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: students.student_id
+      authorization:
+        - ADMIN
+
+/students/marks:
+  - POST:
+      type: DB
+      table: marks
+      content:
+        - student:
+            type: integer
+            required: true
+            represents: student_id
+        - subject:
+            type: integer
+            required: true
+            represents: subject_id
+        - teacher:
+            type: integer
+            required: true
+            represents: teacher_id
+        - mark:
+            type: integer
+            required: true
+        - title:
+            type: string
+            required: true
+      parameters:
+        - id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: student_id
+        - subject_id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: subject_id
+      authorization:
+        - TEACHER
+
+/students/{id}/{subject_id}:
+  - GET:
+      type: DB
+      table: marks
+      columns:
+        - mark_id:
+            - alias: id
+        - mark
+        - title
+        - created_date
+        - teachers.first_name:
+            alias: firstName
+        - teachers.last_name:
+            alias: lastName
+      joins:
+        - students:
+            type: join
+            column: marks.student_id
+            pk: students.student_id
+        - subjects:
+            type: join
+            column: marks.subject_id
+            pk: subjects.subject_id
+        - teachers:
+            type: join
+            column: marks.teacher_id
+            pk: teachers.teacher_id
+      parameters:
+        - id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: students.student_id
+        - subject_id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: subjects.subject_id
+      authorization:
+        - TEACHER
+
+/students/{id}/{subject_id}/average:
+  - GET:
+      type: DB
+      table: marks
+      columns:
+        - mark:
+            function: avg
+            alias: average
+      joins:
+        - students:
+            type: join
+            column: marks.student_id
+            pk: students.student_id
+        - subjects:
+            type: join
+            column: marks.subject_id
+            pk: subjects.subject_id
+      parameters:
+        - id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: students.student_id
+        - subject_id:
+            editable: true
+            type: integer
+            location: path
+            required: true
+            operator: =
+            represents: subjects.subject_id
+      authorization:
+        - TEACHER
+
+/validate-teacher:
+  - GET:
+      type: DB
+      table: teachers
+      columns:
+        - teacher_id:
+            alias: id
+        - first_name:
+            alias: firstName
+        - last_name:
+            alias: lastName
+      joins:
+        - auth_users:
+            type: join
+            column: auth_id
+            pk: user_id
+      parameters:
+        - username:
+            editable: true
+            type: string
+            location: query
+            required: true
+            operator: =
+        - password:
+            editable: true
+            type: string
+            location: query
+            required: true
+            operator: =
+
+/validate-admin:
+  - GET:
+      type: DB
+      table: auth_users
+      columns:
+        - user_id:
+            alias: id
+      parameters:
+        - username:
+            editable: true
+            type: string
+            location: query
+            required: true
+            operator: =
+        - password:
+            editable: true
+            type: string
+            location: query
+            required: true
+            operator: =
+
+
+
+
+

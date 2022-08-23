@@ -1,0 +1,16 @@
+# adapter: mysql
+# dbname: 'rest_students'
+# host: 'localhost'
+# username: 'root'
+# password: ''
+# charset: 'utf8'
+# auth_prefix: 'auth_'
+
+adapter: mysql
+db_name: 'rest_api_students'
+host: 'localhost'
+username: 'furstd'
+password: 'Password1*'
+charset: 'utf8'
+auth_prefix: 'auth_'
+
